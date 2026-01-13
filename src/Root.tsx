@@ -1,45 +1,65 @@
 import "./index.css";
-import { Composition } from "remotion";
-import { HelloWorld, myCompSchema } from "./HelloWorld";
-import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
+import { Composition, Sequence } from "remotion";
+import { IEConference, ieConferenceSchema } from "./P01_title";
+import { ThemePage, themePageSchema } from "./P02_theme";
+import { BulletPage, bulletPageSchema } from "./P03_topic";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      {/* IE Network 2027 Conference Opener */}
       <Composition
-        // You can take the "id" to render a video:
-        // npx remotion render HelloWorld
-        id="HelloWorld"
-        component={HelloWorld}
+        id="title"
+        component={IEConference}
         durationInFrames={150}
         fps={30}
         width={1920}
         height={1080}
-        // You can override these props for each render:
-        // https://www.remotion.dev/docs/parametrized-rendering
-        schema={myCompSchema}
+        schema={ieConferenceSchema}
         defaultProps={{
-          titleText: "Welcome to Remotion",
-          titleColor: "#000000",
-          logoColor1: "#91EAE4",
-          logoColor2: "#86A8E7",
+          mainText: "Call for Papers – IE Network 2027",
+          subText: "45th Annual Industrial Engineering Network Conference",
+          backgroundColor: "#0f172a",
+          mainTextColor: "#ffffff",
+          subTextColor: "#e2e8f0",
         }}
       />
 
-      {/* Mount any React component to make it show up in the sidebar and work on it individually! */}
+      {/* Theme Page */}
       <Composition
-        id="OnlyLogo"
-        component={Logo}
+        id="theme"
+        component={ThemePage}
         durationInFrames={150}
         fps={30}
         width={1920}
         height={1080}
-        schema={myCompSchema2}
+        schema={themePageSchema}
         defaultProps={{
-          logoColor1: "#91dAE2" as const,
-          logoColor2: "#86A8E7" as const,
+          mainText: "Theme: Engineering Tomorrow",
+          subText: "Innovation and Sustainability",
+          backgroundColor: "#0f172a",
+          mainTextColor: "#ffffff",
+          subTextColor: "#e2e8f0",
+          accentColor: "#f97316",
+        }}
+      />
+
+      {/* Bullet Points Page */}
+      <Composition
+        id="topic"
+        component={BulletPage}
+        durationInFrames={200}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={bulletPageSchema}
+        defaultProps={{
+          headerText: "We invite contributions on",
+          backgroundColor: "#ffffff",
+          textColor: "#1a1a1a",
+          accentColor: "#f97316",
         }}
       />
     </>
